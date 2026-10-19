@@ -35,6 +35,6 @@ const hasil = document.querySelector("#hasil");
 if (!jenis || !tanggal) {
 hasil.textContent = "Silakan lengkapi semua data.";return; }
 hasil.textContent ="Data berhasil dimasukkan. Silakan konfirmasi jadwal kunjungan berikutnya kepada bidan."; });
-</script>
+</ script>
 </body>
 </html>
