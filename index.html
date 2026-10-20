@@ -1,2 +1,199 @@
-Ingat KB <!DOCTYPE html> sampai </html>
-/about.html tentang kami strip horizontal
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>INGAT KB - Pengingat Jadwal KB</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #fff8ed;
+      color: #333;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 24px 16px;
+    }
+
+    .kartu {
+      background: white;
+      padding: 24px;
+      border-radius: 16px;
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      color: #087f8c;
+      text-align: center;
+    }
+
+    .subjudul {
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    label {
+      display: block;
+      margin-top: 18px;
+      font-weight: bold;
+    }
+
+    select,
+    input:not([type="checkbox"]),
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 8px;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    select,
+    input {
+      border: 1px solid #ccc;
+      background: white;
+    }
+
+    .persetujuan {
+      font-weight: normal;
+      line-height: 1.5;
+    }
+
+    .persetujuan input {
+      width: auto;
+    }
+
+    button {
+      background: #087f8c;
+      color: white;
+      border: none;
+      margin-top: 24px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    #hasil {
+      margin-top: 20px;
+      padding: 14px;
+      border-radius: 8px;
+      background: #e9f7f5;
+      line-height: 1.7;
+    }
+
+    .catatan {
+      color: #666;
+      font-size: 13px;
+      line-height: 1.6;
+      margin-top: 20px;
+    }
+
+    footer {
+      text-align: center;
+      color: #666;
+      font-size: 12px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="kartu">
+    <h1>INGAT KB 🌷</h1>
+
+    <p class="subjudul">
+      <strong>Ingat Jadwal KB Lebih Mudah</strong><br>
+      Bantu ingat jadwal kunjungan KB dengan lebih praktis.
+    </p>
+
+    <form id="formKB">
+      <label for="nama">Nama panggilan ibu</label>
+      <input
+        type="text"
+        id="nama"
+        name="nama"
+        placeholder="Contoh: Ibu Ani"
+        required
+      >
+
+      <label for="jenis">Pilih jenis kontrasepsi</label>
+      <select id="jenis" name="jenis" required>
+        <option value="">-- Pilih jenis KB --</option>
+        <option value="Suntik 1 bulan">Suntik 1 bulan</option>
+        <option value="Suntik 3 bulan">Suntik 3 bulan</option>
+        <option value="Pil KB">Pil KB</option>
+        <option value="Implan">Implan</option>
+        <option value="IUD">IUD</option>
+        <option value="Kondom">Kondom</option>
+        <option value="Metode lainnya">Metode lainnya</option>
+      </select>
+
+      <label for="tanggal">
+        Tanggal terakhir kunjungan atau penggunaan KB
+      </label>
+      <input
+        type="date"
+        id="tanggal"
+        name="tanggal"
+        required
+      >
+
+      <label class="persetujuan">
+        <input type="checkbox" id="persetujuan" required>
+        Saya setuju menggunakan data ini untuk melihat informasi jadwal KB.
+      </label>
+
+      <button type="submit">Lihat Informasi Jadwal</button>
+    </form>
+
+    <div id="hasil" hidden aria-live="polite"></div>
+
+    <p class="catatan">
+      <strong>Catatan:</strong> Jadwal kunjungan berikutnya perlu
+      dikonfirmasi kepada bidan atau tenaga kesehatan sesuai metode
+      kontrasepsi dan kondisi masing-masing. Website ini belum menyimpan
+      data ke server dan belum mengirim notifikasi otomatis.
+    </p>
+  </div>
+
+  <footer>
+    INGAT KB | Pengingat Jadwal Kunjungan KB
+  </footer>
+
+  <script>
+    const form = document.getElementById("formKB");
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const nama = document.getElementById("nama").value.trim();
+      const jenis = document.getElementById("jenis").value;
+      const tanggal = document.getElementById("tanggal").value;
+      const hasil = document.getElementById("hasil");
+
+      if (!nama || !jenis || !tanggal) {
+        alert("Silakan lengkapi semua data.");
+        return;
+      }
+
+      const tanggalTampil = new Date(
+        tanggal + "T12:00:00"
+      ).toLocaleDateString("id-ID", {
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+      });
+
+      hasil.hidden = false;
+      hasil.textContent =
+        "Terima kasih, " + nama +
+        ". Metode KB: " + jenis +
+        ". Tanggal yang kamu masukkan: " + tanggalTampil +
+        ". Silakan konfirmasikan jadwal kunjungan berikutnya kepada bidan.";
+    });
+  </script>
+</body>
+</html>
